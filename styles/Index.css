@@ -1,0 +1,33 @@
+.content{
+    font-family:'Times New Roman', Times, serif;
+   display: flex;
+   justify-content:flex-end;
+   align-items: flex-end;
+
+  
+
+}
+/* h1{
+    display: flex;
+} */
+.wholediv{
+   
+    background-color: white;
+    border: saddlebrown;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 2rem;
+}
+.content{
+    margin-top: -3pc;
+}
+/* .img{
+    display: flex;
+  justify-content: flex-start;
+} */
+.imageContainer{
+    display: flex;
+    margin: 1rem;
+}
