@@ -1,19 +1,20 @@
 import React from "react";
 import styled from "styled-components";
 import agendaData from "../../pages/api/MockData/agendaData";
-import DayView from "../DayView/DayView";
+ import DayView from "../DayView/DayView";
 
- const DayViewConatiner = styled.div`
+
+const DayViewConatiner = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   border: 1px solid #a7a8aa;
   background-color: white;
-  justify-content:space-between;
+  justify-content: space-between;
   margin: 2rem 2rem 0 2rem;
-  padding :1rem;
+  padding: 1rem;
   ul {
-    padding-left: 0;
+    padding-left:0;
   }
 `;
 
@@ -22,9 +23,11 @@ const MainTitle = styled.div`
   font-size: 1.5rem;
   line-height: 1.625rem;
   font-weight: bold;
-  color: #0d3f5e;
-  margin-bottom: 0.625rem;
- 
+  width: 100%;
+
+  padding-bottom: 2rem;
+  border-bottom: 5px solid;
+  border-bottom-color: rgb(212, 102, 6);
 `;
 
 const Agenda = () => {
@@ -42,7 +45,6 @@ const Agenda = () => {
           <DayView
             key={index}
             subject={agenda.subject}
-            bodyPreview={agenda.bodyPreview}
             time={getTime(agenda.start.dateTime, agenda.end.dateTime)}
           />
         );
