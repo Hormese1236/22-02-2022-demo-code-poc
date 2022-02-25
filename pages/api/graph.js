@@ -71,3 +71,22 @@ export function taskUpdate (taskListId,task,accessToken){
       console.log(error)
     });
 }
+export function calendarevnets(
+  startDateString,
+  endDateString,
+  USER_PUBLIC_ID,
+  accessToken
+) {
+  axios({
+    url: `https://graph.microsoft.com/v1.0/users/${USER_PUBLIC_ID}/calendarview?startdatetime=${startDateString}&enddatetime=${endDateString}&orderby=start/dateTime`,
+
+    method: "GET",
+
+    headers: {
+      Authorization: `Bearer ${accessToken}`
+
+      // "Content-type": "text",
+    },
+  });
+
+}
