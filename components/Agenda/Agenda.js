@@ -24,7 +24,7 @@ const MainTitle = styled.div`
   line-height: 1.625rem;
   font-weight: bold;
   width: 100%;
-
+  color: #0d3f5e;
   padding-bottom: 2rem;
   border-bottom: 5px solid;
   border-bottom-color: rgb(212, 102, 6);

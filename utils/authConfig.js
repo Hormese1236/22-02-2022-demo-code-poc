@@ -16,10 +16,14 @@ export const loginRequest = {
     "Tasks.Read.Shared",
     "Tasks.ReadWrite",
     "Tasks.ReadWrite.Shared",
+    "Calendars.Read",
+    "Calendars.Read.Shared",
+    "Calendars.ReadWrite",
+    "Calendars.ReadWrite.Shared",
   ],
 };
 
 // Add here the endpoints for MS Graph API services you would like to use.
 export const graphConfig = {
-  graphMeEndpoint: "https://graph.microsoft.com/v1.0/me/todo/lists",
+  graphMeEndpoint: "https://graph.microsoft.com/v1.0/me",
 };

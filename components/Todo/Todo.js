@@ -7,7 +7,7 @@ import SeeMore from "../SeeMore/SeeMore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons/faArrowRight";
 import { taskUpdate } from "../../pages/api/graph";
-import { calendarevnets } from "../../pages/api/graph";
+import { calenderevents } from "../../pages/api/graph";
 
 const ToDoBaseContainer = styled.div`
   display: flex;
@@ -113,14 +113,17 @@ const GotoLinkContainer = styled.div`
 `;
 
 const Todo = (props) => {
-  const { tasks,taskListId,accessToken} = props;
-  
+  const { tasks, taskListId, accessToken } = props;
+  calenderevents(accessToken);
 
   const getTodos = () => {
     return tasks.map((task) => (
       <DataContent key={task.id}>
         <toggleButton>
-          <ToggleButton isToggle={task.status === "completed" ? true : false} onToggleChange={()=>taskUpdate(taskListId,task,accessToken)} />
+          <ToggleButton
+            isToggle={task.status === "completed" ? true : false}
+            onToggleChange={() => taskUpdate(taskListId, task, accessToken)}
+          />
         </toggleButton>
         <h1>{task.title}</h1>
         {task.importance === "high" ? <Badge>{task.importance}</Badge> : <></>}

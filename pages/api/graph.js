@@ -1,7 +1,5 @@
 import { graphConfig } from "../../utils/authConfig";
-import axios from 'axios';
-
-
+import axios from "axios";
 
 /**
  * Attaches a given access token to a Microsoft Graph API call. Returns information about the user
@@ -17,7 +15,7 @@ export async function callMsGraph(accessToken) {
     headers: headers,
   };
 
-  return fetch(graphConfig.graphMeEndpoint, options)
+  return fetch(`${graphConfig.graphMeEndpoint}/todo/lists`, options)
     .then((response) => response.json())
     .catch((error) => console.log(error));
 }
@@ -33,60 +31,57 @@ export async function callMsGraphTodoTaskList(accessToken, taskId) {
     headers: headers,
   };
 
-  return fetch(`${graphConfig.graphMeEndpoint}/${taskId}/tasks`, options)
+  return fetch(`${graphConfig.graphMeEndpoint}/todo/lists/${taskId}/tasks`, options)
     .then((response) => response.json())
     .catch((error) => console.log(error));
 }
 
+export function taskUpdate(taskListId, task, accessToken) {
+  //   const todoTask = {
+  //     taskStatus: {
 
-export function taskUpdate (taskListId,task,accessToken){
-//   const todoTask = {
-//     taskStatus: {
+  //        taskStatus:'completed'
+  //     }
+  //  };
 
-//        taskStatus:'completed'
-//     }
-//  };
-  
   axios({
-    method: 'patch',
-    url: `${graphConfig.graphMeEndpoint}/${taskListId}/tasks/${task.id}`,
-
-    
-    headers:{
-      Authorization:`Bearer ${accessToken}`,
-      "Content-Type":"application/json"
-      
-      
-     
-    }, 
-    data: {
-      status: 'completed'
-    }
-  })
-    .then( (response)=>{
-   
-      console.log(response);
-    })
-    .catch(error => {
-      console.log(error)
-    });
-}
-export function calendarevnets(
-  startDateString,
-  endDateString,
-  USER_PUBLIC_ID,
-  accessToken
-) {
-  axios({
-    url: `https://graph.microsoft.com/v1.0/users/${USER_PUBLIC_ID}/calendarview?startdatetime=${startDateString}&enddatetime=${endDateString}&orderby=start/dateTime`,
-
-    method: "GET",
+    method: "patch",
+    url: `${graphConfig.graphMeEndpoint}/todo/lists/${taskListId}/tasks/${task.id}`,
 
     headers: {
-      Authorization: `Bearer ${accessToken}`
-
-      // "Content-type": "text",
+      Authorization: `Bearer ${accessToken}`,
+      "Content-Type": "application/json",
     },
-  });
+    data: {
+      status: "completed",
+    },
+  })
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+export async function calenderevents(accessToken) {
+  axios({
+    method: "GET",
 
+    url: `${
+      graphConfig.graphMeEndpoint
+    }/calendar/calendarView?startDateTime=2022-01-01T19:00:00-08:00&endDateTime=2023-01-07T19:00:00-08:00`,
+
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => {
+      console.log(response);
+    })
+
+    .catch((error) => {
+      console.log(error);
+    });
 }
