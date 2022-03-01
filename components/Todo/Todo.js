@@ -1,11 +1,12 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import ToggleButton from "../ToogleButton/ToogleButton";
 import Badge from "../Badge/Badge";
 import SeeMore from "../SeeMore/SeeMore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons/faArrowRight";
+import { faFilter } from "@fortawesome/free-solid-svg-icons/faFilter";
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons/faChevronDown";
 import { taskUpdate } from "../../pages/api/graph";
 // import { calenderevents } from "../../pages/api/graph";
 
@@ -42,6 +43,10 @@ const DataContent = styled.div`
   padding: 1rem 0 1.5rem 0;
   border-bottom: 1px solid #e9e9e7;
   margin-right: 1rem;
+  &:last-child {
+    padding-bottom: 0;
+    border-bottom: none;
+  }
 
   h1 {
     color: #2b2b2b;
@@ -90,57 +95,137 @@ const GotoLinkContainer = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-
-  a {
-    width: fit-content;
-    font-size: 1rem;
-    color: #00728d;
-    text-decoration: underline;
-    font-style: normal;
-    font-weight: bold;
-    line-height: 1.25rem;
-  }
+  justify-content: space-between;
+  margin-top: 25px;
 `;
 
-const RightArrow = styled.div`
-  font-style: normal;
-  font-weight: 900;
-  font-size: 1rem;
+const ViewAll = styled.span`
+  display: flex;
+  width: 8rem;
+  text-decoration-line: underline;
+  color: #00728d;
+  justify-content: space-around;
+  align-items: center;
+  cursor: pointer;
+`;
+
+const AddNewButton = styled.button`
+  padding: 0.75rem;
+  border: none;
+  border-radius: 20px;
+  min-width: 7rem;
+  height: 2.5rem;
   line-height: 1rem;
-  align-self: center;
-  color: #0d3f5e;
-  margin-left: 0.5rem;
+  background-color: #0d3f5e;
+  color: #fff;
+`;
+
+const DateFilterContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+`;
+
+const Filter = styled.span`
+  display: flex;
+  width: 5rem;
+  text-decoration-line: underline;
+  font-style: normal;
+
+  font-size: bold;
+  color: #00728d;
+  justify-content: space-around;
+  align-items: center;
+  cursor: pointer;
 `;
 
 const Todo = (props) => {
   const { tasks, taskListId, accessToken } = props;
-  // calenderevents(accessToken);
+  const [viewAllTodo, setViewAllTodo] = useState(false);
+
+  const renderDate = () => {
+    const currentDate = new Date();
+    const weekday = new Array(
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday"
+    );
+    const months = new Array(
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    );
+    const dayOfWeek = weekday[currentDate.getDay()];
+    const dayOfMonth =
+      currentDate.getDate() < 10
+        ? `0${currentDate.getDate()}`
+        : currentDate.getDate();
+    const curMonth = months[currentDate.getMonth()];
+    const curYear = currentDate.getFullYear();
+    return `Today - ${curMonth} ${dayOfMonth}, ${curYear}`;
+  };
+
+  const expandTodo = () => {
+    setViewAllTodo((viewAll) => !viewAll);
+  };
 
   const getTodos = () => {
-    return tasks.map((task) => (
-      <DataContent key={task.id}>
-        <ToggleButtonConatiner>
-          <ToggleButton
-            isToggle={task.status === "completed" ? true : false}
-            onToggleChange={() => taskUpdate(taskListId, task, accessToken)}
-          />
-        </ToggleButtonConatiner>
-        <h1>{task.title}</h1>
-        {task.importance === "high" ? <Badge>{task.importance}</Badge> : <></>}
-        <SeeMore isCollapsed />
-      </DataContent>
-    ));
+    return tasks.map((task, index) => {
+      return (
+        (!viewAllTodo ? index < 5 : index <= tasks.length) && (
+          <DataContent key={task.id}>
+            <ToggleButtonConatiner>
+              <ToggleButton
+                isToggle={task.status === "completed" ? true : false}
+                onToggleChange={() => taskUpdate(taskListId, task, accessToken)}
+              />
+            </ToggleButtonConatiner>
+            <h1>{task.title}</h1>
+            {task.importance === "high" ? (
+              <Badge>{task.importance}</Badge>
+            ) : (
+              <></>
+            )}
+            <SeeMore isCollapsed />
+          </DataContent>
+        )
+      );
+    });
   };
 
   return (
     <ToDoBaseContainer>
       <MainTitle>To-Do</MainTitle>
+      <DateFilterContainer>
+        <div>{renderDate()}</div>
+        <Filter>
+          <FontAwesomeIcon icon={faFilter} />
+          Filters
+        </Filter>
+      </DateFilterContainer>
       <ul>{getTodos()}</ul>
       <GotoLinkContainer>
-        <a href="/">View All</a>
-        <RightArrow>
-          <FontAwesomeIcon icon={faArrowRight} />
-        </RightArrow>
+        <AddNewButton>Add New</AddNewButton>
+        {!viewAllTodo && tasks.length > 5 && (
+          <ViewAll role="button" onClick={expandTodo}>
+            View All
+            <FontAwesomeIcon icon={faChevronDown} />
+          </ViewAll>
+        )}
       </GotoLinkContainer>
     </ToDoBaseContainer>
   );
