@@ -31,23 +31,18 @@ export async function callMsGraphTodoTaskList(accessToken, taskId) {
     headers: headers,
   };
 
-  return fetch(`${graphConfig.graphMeEndpoint}/todo/lists/${taskId}/tasks`, options)
+  return fetch(
+    `${graphConfig.graphMeEndpoint}/todo/lists/${taskId}/tasks`,
+    options
+  )
     .then((response) => response.json())
     .catch((error) => console.log(error));
 }
 
 export function taskUpdate(taskListId, task, accessToken) {
-  //   const todoTask = {
-  //     taskStatus: {
-
-  //        taskStatus:'completed'
-  //     }
-  //  };
-
   axios({
     method: "patch",
     url: `${graphConfig.graphMeEndpoint}/todo/lists/${taskListId}/tasks/${task.id}`,
-
     headers: {
       Authorization: `Bearer ${accessToken}`,
       "Content-Type": "application/json",
@@ -63,24 +58,18 @@ export function taskUpdate(taskListId, task, accessToken) {
       console.log(error);
     });
 }
-export async function calenderevents(accessToken) {
-  axios({
+export function getCalenderEvents(accessToken) {
+  return axios({
     method: "GET",
-
-    url: `${
-      graphConfig.graphMeEndpoint
-    }/calendar/calendarView?startDateTime=2022-01-01T19:00:00-08:00&endDateTime=2023-01-07T19:00:00-08:00`,
-
+    url: `${graphConfig.graphMeEndpoint}/calendar/calendarView?startDateTime=2022-01-01T19:00:00-08:00&endDateTime=2023-01-07T19:00:00-08:00`,
     headers: {
       Authorization: `Bearer ${accessToken}`,
-
       "Content-Type": "application/json",
     },
   })
     .then((response) => {
-      console.log(response);
+      return response.data;
     })
-
     .catch((error) => {
       console.log(error);
     });

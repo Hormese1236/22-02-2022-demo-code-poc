@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const DayViewList = styled.div`
+const ScheduleList = styled.div`
   padding: 1.5rem;
   border-bottom: $mid-grey 1px solid;
   border-width: thin;
@@ -14,7 +14,7 @@ const DayViewList = styled.div`
   margin: 2px;
 `;
 
-const DayViewTime = styled.div`
+const ScheduleTime = styled.div`
   font-size: 1rem;
   width: 100%;
   font-weight: bold;
@@ -22,7 +22,7 @@ const DayViewTime = styled.div`
   color: rgb(56, 59, 77);
 `;
 
-const DayViewTitle = styled.div`
+const ScheduleTitle = styled.div`
   font-size: 0.875rem;
   font-weight: normal;
   color: $screen-black;
@@ -43,8 +43,7 @@ const Timeline = styled.div`
       width: 2px;
       background: rgb(157, 163, 158);
       position: absolute;
-      left: 3px;
-      top: 9px;
+      left: 8px;
       height: 100%;
     }
     li {
@@ -56,31 +55,32 @@ const Timeline = styled.div`
         display: inline-block;
         width: 8px;
         height: 8px;
-        background: rgb(157, 163, 158);
+        background: white;
         position: absolute;
         left: 0;
-        border-radius:15px;
+        border: 5px solid #0d3f5e;
+        border-radius: 15px;
       }
     }
   }
 `;
 
-const DayView = (props) => {
+const ScheduleCard = (props) => {
   const { time, subject, bodyPreview } = props;
   return (
     <Timeline>
       <ul>
         <li>
-          <DayViewList>
-            <DayViewTime>{time} </DayViewTime>
-            <DayViewTitle>
+          <ScheduleList>
+            <ScheduleTime>{time} </ScheduleTime>
+            <ScheduleTitle>
               <span>{subject}</span>
-            </DayViewTitle>
-          </DayViewList>
+            </ScheduleTitle>
+          </ScheduleList>
         </li>
       </ul>
     </Timeline>
   );
 };
 
-export default DayView;
+export default ScheduleCard;

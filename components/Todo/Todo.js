@@ -7,7 +7,7 @@ import SeeMore from "../SeeMore/SeeMore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons/faArrowRight";
 import { taskUpdate } from "../../pages/api/graph";
-import { calenderevents } from "../../pages/api/graph";
+// import { calenderevents } from "../../pages/api/graph";
 
 const ToDoBaseContainer = styled.div`
   display: flex;
@@ -18,18 +18,18 @@ const ToDoBaseContainer = styled.div`
   padding: 1rem;
   margin: 2rem 2rem 0 2rem;
 
-  mainTitle {
-    font-style: normal;
-    font-size: 1.5rem;
-    line-height: 1.625rem;
-    font-weight: bold;
-    color: #0d3f5e;
-    margin-bottom: 0.625rem;
-  }
-
   ul {
     padding-left: 0;
   }
+`;
+
+const MainTitle = styled.div`
+  font-style: normal;
+  font-size: 1.5rem;
+  line-height: 1.625rem;
+  font-weight: bold;
+  color: #0d3f5e;
+  margin-bottom: 0.625rem;
 `;
 
 const DataContent = styled.div`
@@ -37,22 +37,11 @@ const DataContent = styled.div`
   flex-direction: column;
   flex-wrap: wrap;
   position: relative;
-  width:  display:flex;
-  width:31.25rem;
+  display: flex;
+  width: 31.25rem;
   padding: 1rem 0 1.5rem 0;
   border-bottom: 1px solid #e9e9e7;
   margin-right: 1rem;
-
-  toggleButton {
-    right: 0;
-    font-size: 1rem;
-    font-weight: 900;
-    padding: 0.75rem;
-    margin-right: 1.5rem;
-    margin-top: 0.3rem;
-    cursor: pointer;
-    position: absolute;
-  }
 
   h1 {
     color: #2b2b2b;
@@ -86,6 +75,17 @@ const DataContent = styled.div`
   }
 `;
 
+const ToggleButtonConatiner = styled.div`
+  right: 0;
+  font-size: 1rem;
+  font-weight: 900;
+  padding: 0.75rem;
+  margin-right: 1.5rem;
+  margin-top: 0.3rem;
+  cursor: pointer;
+  position: absolute;
+`;
+
 const GotoLinkContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -100,31 +100,31 @@ const GotoLinkContainer = styled.div`
     font-weight: bold;
     line-height: 1.25rem;
   }
+`;
 
-  rightArrow {
-    font-style: normal;
-    font-weight: 900;
-    font-size: 1rem;
-    line-height: 1rem;
-    align-self: center;
-    color: #0d3f5e;
-    margin-left: 0.5rem;
-  }
+const RightArrow = styled.div`
+  font-style: normal;
+  font-weight: 900;
+  font-size: 1rem;
+  line-height: 1rem;
+  align-self: center;
+  color: #0d3f5e;
+  margin-left: 0.5rem;
 `;
 
 const Todo = (props) => {
   const { tasks, taskListId, accessToken } = props;
-  calenderevents(accessToken);
+  // calenderevents(accessToken);
 
   const getTodos = () => {
     return tasks.map((task) => (
       <DataContent key={task.id}>
-        <toggleButton>
+        <ToggleButtonConatiner>
           <ToggleButton
             isToggle={task.status === "completed" ? true : false}
             onToggleChange={() => taskUpdate(taskListId, task, accessToken)}
           />
-        </toggleButton>
+        </ToggleButtonConatiner>
         <h1>{task.title}</h1>
         {task.importance === "high" ? <Badge>{task.importance}</Badge> : <></>}
         <SeeMore isCollapsed />
@@ -134,13 +134,13 @@ const Todo = (props) => {
 
   return (
     <ToDoBaseContainer>
-      <mainTitle>To-Do</mainTitle>
+      <MainTitle>To-Do</MainTitle>
       <ul>{getTodos()}</ul>
       <GotoLinkContainer>
         <a href="/">View All</a>
-        <rightArrow>
+        <RightArrow>
           <FontAwesomeIcon icon={faArrowRight} />
-        </rightArrow>
+        </RightArrow>
       </GotoLinkContainer>
     </ToDoBaseContainer>
   );
