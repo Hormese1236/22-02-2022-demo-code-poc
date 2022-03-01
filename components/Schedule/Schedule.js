@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import dateFormat, { masks } from "dateformat";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronLeft } from "@fortawesome/free-solid-svg-icons/faChevronLeft";
+import { faChevronRight } from "@fortawesome/free-solid-svg-icons/faChevronRight";
 import ScheduleCard from "../ScheduleCard/ScheduleCard";
-import ScheduleDate from "../ScheduleDate/ScheduleDate";
 import { getCalenderEvents } from "../../pages/api/graph";
 
 const { loginRequest } = require("../../utils/authConfig");
@@ -39,9 +42,57 @@ const TitleSeperator = styled.div`
   margin-top: 1rem;
 `;
 
+const DateContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const Button = styled.button`
+  border: none;
+  background: transparent;
+`;
+
+const Span = styled.span`
+  cursor: pointer;
+`;
+
 const Schedule = (props) => {
   const { instance, account } = props;
   const [scheduleData, setScheduleData] = useState([]);
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const renderDate = (date) => {
+    const weekday = new Array(
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday"
+    );
+    const months = new Array(
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    );
+    const dayOfWeek = weekday[date.getDay()];
+    const dayOfMonth =
+      date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
+    const curMonth = months[date.getMonth()];
+    const curYear = date.getFullYear();
+    return `${dayOfWeek}, ${curMonth} ${dayOfMonth}, ${curYear}`;
+  };
+
+  const [displayDate, setDisplayDate] = useState(renderDate(currentDate));
 
   const getTime = (startTime, endTime) => {
     return `${new Date(startTime).toLocaleTimeString("en-US", {
@@ -55,6 +106,20 @@ const Schedule = (props) => {
     `;
   };
 
+  const getStartDateTime = () => {
+    return dateFormat(
+      new Date(currentDate.setHours(0, 0, 0, 0)),
+      "isoDateTime"
+    );
+  };
+
+  const getEndDateTime = () => {
+    return dateFormat(
+      new Date(currentDate.setHours(23, 59, 59, 999)),
+      "isoDateTime"
+    );
+  };
+
   const getEvents = () => {
     const request = {
       ...loginRequest,
@@ -63,13 +128,31 @@ const Schedule = (props) => {
     instance
       .acquireTokenSilent(request)
       .then((response) => {
-        getCalenderEvents(response.accessToken).then((response) => {
+        getCalenderEvents(
+          response.accessToken,
+          getStartDateTime(currentDate),
+          getEndDateTime(currentDate)
+        ).then((response) => {
           setScheduleData(response.value);
         });
       })
       .catch((e) => {
         console.log("Error");
       });
+  };
+
+  const handlePreviousDay = () => {
+    const yesterday = new Date(currentDate.setDate(currentDate.getDate() - 1));
+    setCurrentDate(yesterday);
+    setDisplayDate(renderDate(yesterday));
+    getEvents();
+  };
+
+  const handleNextDay = () => {
+    const tomorrow = new Date(currentDate.setDate(currentDate.getDate() + 1));
+    setCurrentDate(tomorrow);
+    setDisplayDate(renderDate(tomorrow));
+    getEvents();
   };
 
   useEffect(() => {
@@ -79,10 +162,21 @@ const Schedule = (props) => {
   return (
     <ScheduleViewConatiner>
       <MainTitle>Schedule</MainTitle>
-      <ScheduleDate />
+      <DateContainer>
+        <Button type="button" onClick={handlePreviousDay}>
+          <Span>
+            <FontAwesomeIcon icon={faChevronLeft} />
+          </Span>
+        </Button>
+        {displayDate}
+        <Button type="button" onClick={handleNextDay}>
+          <Span>
+            <FontAwesomeIcon icon={faChevronRight} />
+          </Span>
+        </Button>
+      </DateContainer>
       <TitleSeperator />
-
-      {scheduleData ? (
+      {scheduleData.length > 0 ? (
         scheduleData.map((agenda, index) => {
           return (
             <ScheduleCard
@@ -93,7 +187,7 @@ const Schedule = (props) => {
           );
         })
       ) : (
-        <>No data found</>
+        <div>No data found</div>
       )}
     </ScheduleViewConatiner>
   );

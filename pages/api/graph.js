@@ -58,10 +58,10 @@ export function taskUpdate(taskListId, task, accessToken) {
       console.log(error);
     });
 }
-export function getCalenderEvents(accessToken) {
+export function getCalenderEvents(accessToken, startDate, endDate) {
   return axios({
     method: "GET",
-    url: `${graphConfig.graphMeEndpoint}/calendar/calendarView?startDateTime=2022-01-01T19:00:00-08:00&endDateTime=2023-01-07T19:00:00-08:00`,
+    url: `${graphConfig.graphMeEndpoint}/calendar/calendarView?startDateTime=${startDate}&endDateTime=${endDate}`,
     headers: {
       Authorization: `Bearer ${accessToken}`,
       "Content-Type": "application/json",

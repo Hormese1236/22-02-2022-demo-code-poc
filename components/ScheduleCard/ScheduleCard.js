@@ -60,6 +60,7 @@ const Timeline = styled.div`
         left: 0;
         border: 5px solid #0d3f5e;
         border-radius: 15px;
+        margin-top: 25px;
       }
     }
   }
