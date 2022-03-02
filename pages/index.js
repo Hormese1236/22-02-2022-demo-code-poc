@@ -43,6 +43,16 @@ export default function Home() {
 
   const name = accounts[0] && accounts[0].name;
 
+  const updateTask = (task) =>{
+    const updatedData = taskData.map((element) => {
+      if (element.id === task.id){
+        return { ...element, isExpanded: !element.isExpanded };
+      }
+     return element; 
+    });
+    setTaskData(updatedData);
+    }
+
   function RequestAccessToken() {
     const request = {
       ...loginRequest,
@@ -74,7 +84,10 @@ export default function Home() {
       .then((response) => {
         callMsGraphTodoTaskList(response.accessToken, taskId).then(
           (response) => {
-            setTaskData(response.value);
+            const updatedData = response.value.map((element) => {
+              return { ...element, isExpanded: false };
+            });
+            setTaskData(updatedData);
           }
         );
       })
@@ -135,6 +148,7 @@ export default function Home() {
                 tasks={taskData}
                 taskListId={taskId}
                 accessToken={accessToken}
+                updateTask={updateTask}
               />
             ) : (
               <button onClick={RequestTaskData}>Get Task List</button>

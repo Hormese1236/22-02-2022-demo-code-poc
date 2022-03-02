@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown } from "@fortawesome/free-solid-svg-icons/faChevronDown";
+import { faChevronDown} from "@fortawesome/free-solid-svg-icons/faChevronDown";
+
 
 const SeeMoreButton = styled.button`
   border: none;
@@ -41,8 +42,9 @@ const SeeMore = (props) => {
   return (
     <SeeMoreButton onClick={onClick}>
       {isCollapsed ? "See More" : "See Less"}
-      <span className={isCollapsed ? "" : "up"}>
+      <span className={isCollapsed ? "" : ""}>
         <FontAwesomeIcon icon={faChevronDown} />
+        
       </span>
     </SeeMoreButton>
   );

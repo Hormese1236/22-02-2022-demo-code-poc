@@ -141,9 +141,10 @@ const Filter = styled.span`
 `;
 
 const Todo = (props) => {
-  const { tasks, taskListId, accessToken } = props;
+  const { tasks, taskListId, accessToken,updateTask } = props;
   const [viewAllTodo, setViewAllTodo] = useState(false);
 
+ 
   const renderDate = () => {
     const currentDate = new Date();
     const weekday = new Array(
@@ -200,7 +201,12 @@ const Todo = (props) => {
             ) : (
               <></>
             )}
-            <SeeMore isCollapsed />
+            {task.isExpanded ? <div>
+              <p>Task priority: {task.importance}</p>
+              <p>Status: {task.status}</p>
+              <p>Start date: {task.createdDateTime}</p>
+            </div> : <></>}
+            <SeeMore isCollapsed onClick={()=> updateTask(task)} />
           </DataContent>
         )
       );
