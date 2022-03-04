@@ -207,6 +207,7 @@ const Todo = (props) => {
               <p>Start date: {task.createdDateTime}</p>
             </div> : <></>}
             <SeeMore isCollapsed onClick={()=> updateTask(task)} />
+            
           </DataContent>
         )
       );

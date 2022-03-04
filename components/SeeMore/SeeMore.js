@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown} from "@fortawesome/free-solid-svg-icons/faChevronDown";
-
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons/faChevronDown";
 
 const SeeMoreButton = styled.button`
   border: none;
@@ -37,14 +36,27 @@ const SeeMoreButton = styled.button`
   }
 `;
 
+// const SeeMore = (props) => {
+//   const { isCollapsed, onClick } = props;
+//   return (
+//     <SeeMoreButton onClick={onClick}>
+//       {isCollapsed ? "See More" : "See Less"}
+//       <span>
+//         <FontAwesomeIcon icon={faChevronDown} />
+//       </span>
+//     </SeeMoreButton>
+//   );
+// };
 const SeeMore = (props) => {
-  const { isCollapsed, onClick } = props;
+  const [isCollapsed, setIsCollapsed] = useState(true);
+  const changeSeeMore = (props) => {
+    setIsCollapsed(!isCollapsed);
+  };
   return (
-    <SeeMoreButton onClick={onClick}>
-      {isCollapsed ? "See More" : "See Less"}
-      <span className={isCollapsed ? "" : ""}>
+    <SeeMoreButton onClick={changeSeeMore}>
+      {isCollapsed ? "see more" : " see less"}
+      <span>
         <FontAwesomeIcon icon={faChevronDown} />
-        
       </span>
     </SeeMoreButton>
   );
