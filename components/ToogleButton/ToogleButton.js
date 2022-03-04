@@ -69,6 +69,7 @@ const ToggleButton = (props) => {
           onChange={ToggleChange}
         />
         <CheckBoxLabel htmlFor="checkbox" />
+        
         <ToggleText>{isToggle ? "Mark as done" : "Mark as undone"}</ToggleText>
       </CheckBoxWrapper>
     </>

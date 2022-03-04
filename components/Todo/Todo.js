@@ -8,7 +8,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter } from "@fortawesome/free-solid-svg-icons/faFilter";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons/faChevronDown";
 import { taskUpdate } from "../../pages/api/graph";
-// import { calenderevents } from "../../pages/api/graph";
+import { render } from "react-dom";
+import Form from "../Form";
+
 
 const ToDoBaseContainer = styled.div`
   display: flex;
@@ -143,7 +145,8 @@ const Filter = styled.span`
 const Todo = (props) => {
   const { tasks, taskListId, accessToken,updateTask } = props;
   const [viewAllTodo, setViewAllTodo] = useState(false);
-
+  const [buttonchange, setbuttononchange] = useState(false);
+// [button ,setbutton]=usestate("true")
  
   const renderDate = () => {
     const currentDate = new Date();
@@ -213,6 +216,14 @@ const Todo = (props) => {
       );
     });
   };
+  function addbutton(){
+    
+  setbuttononchange(true)
+   
+  
+
+   
+  }
 
   return (
     <ToDoBaseContainer>
@@ -226,7 +237,7 @@ const Todo = (props) => {
       </DateFilterContainer>
       <ul>{getTodos()}</ul>
       <GotoLinkContainer>
-        <AddNewButton>Add New</AddNewButton>
+        <AddNewButton onClick={addbutton}>Add New</AddNewButton>
         {!viewAllTodo && tasks.length > 5 && (
           <ViewAll role="button" onClick={expandTodo}>
             View All
@@ -234,6 +245,7 @@ const Todo = (props) => {
           </ViewAll>
         )}
       </GotoLinkContainer>
+    {buttonchange ? <Form/>:""}
     </ToDoBaseContainer>
   );
 };

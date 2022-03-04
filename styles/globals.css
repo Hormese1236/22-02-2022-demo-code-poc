@@ -16,4 +16,41 @@ a {
   box-sizing: border-box;
   
 }
+.header{
+  color: #0d3f5e;
 
+}
+.title{
+  color: #0d3f5e;
+  font-weight: bolder;
+  font-style: normal;
+  font-size: larger;
+
+  
+
+}
+.name{
+  width: 25pc;
+  height: 3pc;
+  border-radius: 1pc;
+  /* border-color:black; */
+}
+.priority{
+  color: #0d3f5e;
+  font-weight: bolder;
+  font-style: normal;
+  font-size: larger;
+}
+.ttle{
+ width: 25pc;
+ height: 3pc;
+ border-radius: 1pc;
+  border-color:black;
+}
+.desc{
+  color: #0d3f5e;
+  width: 40pc;
+ height: 10pc;
+
+  
+}
