@@ -47,7 +47,7 @@ const CheckBox = styled.input`
 `;
 
 const ToggleText = styled.span`
-  margin-top: 0.5rem;
+  margin-top: 0.2rem;
   font-size: 10px;
 `;
 

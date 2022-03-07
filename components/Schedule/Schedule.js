@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import get from "lodash/get";
+import isEmpty from "lodash/isEmpty";
 import dateFormat, { masks } from "dateformat";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons/faChevronLeft";
@@ -133,7 +135,11 @@ const Schedule = (props) => {
           getStartDateTime(currentDate),
           getEndDateTime(currentDate)
         ).then((response) => {
-          setScheduleData(response.value);
+          const value = get(response,'value','')
+          if(!isEmpty(value)){
+            setScheduleData(value);
+          }
+          
         });
       })
       .catch((e) => {
