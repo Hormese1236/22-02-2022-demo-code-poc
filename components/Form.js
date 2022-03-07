@@ -29,7 +29,9 @@ export default class Form extends Component {
   handleSubmit(event) {
     alert('A name was submitted: ' + this.state.value);
     event.preventDefault();
-    <GfgDatePicker name={this.state.value}/>
+    <GfgDatePicker />
+ 
+    
   }
   render() {
     return (

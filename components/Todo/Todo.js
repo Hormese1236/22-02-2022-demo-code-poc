@@ -7,7 +7,7 @@ import SeeMore from "../SeeMore/SeeMore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter } from "@fortawesome/free-solid-svg-icons/faFilter";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons/faChevronDown";
-import { taskUpdate } from "../../pages/api/graph";
+import { addtask, taskUpdate } from "../../pages/api/graph";
 import { render } from "react-dom";
 import Form from "../Form";
 
@@ -223,7 +223,7 @@ const Todo = (props) => {
 
    
   }
-
+addtask(accessToken,taskListId)
   return (
     <ToDoBaseContainer>
       <MainTitle>To-Do</MainTitle>
