@@ -52,7 +52,7 @@ const ToggleText = styled.span`
 `;
 
 const ToggleButton = (props) => {
-  const { isToggle,onToggleChange } = props;
+  const { isToggle, onToggleChange } = props;
 
   const [toggleState, setToggleState] = useState(isToggle);
   const ToggleChange = () => {

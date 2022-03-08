@@ -12,7 +12,6 @@ import { render } from "react-dom";
 import Form from "../Form";
 import { StandardInteractionClient } from "@azure/msal-browser";
 
-
 const ToDoBaseContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -144,11 +143,11 @@ const Filter = styled.span`
 `;
 
 const Todo = (props) => {
-  const { tasks, taskListId, accessToken,updateTask } = props;
+  const { tasks, taskListId, accessToken, updateTask } = props;
   const [viewAllTodo, setViewAllTodo] = useState(false);
   const [buttonchange, setbuttononchange] = useState(false);
-// [button ,setbutton]=usestate("true")
- 
+  // [button ,setbutton]=usestate("true")
+
   const renderDate = () => {
     const currentDate = new Date();
     const weekday = new Array(
@@ -217,25 +216,23 @@ const Todo = (props) => {
             ) : (
               <></>
             )}
-            {task.isExpanded ? <div>
-              <p>Task priority: {task.importance}</p>
-              <p>Status: {task.status}</p>
-              <p>Start date: {task.createdDateTime}</p>
-            </div> : <></>}
-            <SeeMore isCollapsed onClick={()=> updateTask(task)} />
-            
+            {task.isExpanded ? (
+              <div>
+                <p>Task priority: {task.importance}</p>
+                <p>Status: {task.status}</p>
+                <p>Start date: {task.createdDateTime}</p>
+              </div>
+            ) : (
+              <></>
+            )}
+            <SeeMore isCollapsed onClick={() => updateTask(task)} />
           </DataContent>
         )
       );
     });
   };
-  function addbutton(){
-    
-  setbuttononchange(true)
-   
-  
-
-   
+  function addbutton() {
+    setbuttononchange(true);
   }
 
   return (
@@ -258,12 +255,9 @@ const Todo = (props) => {
           </ViewAll>
         )}
       </GotoLinkContainer>
-      {/* <Popup trigger={<button> Click to open popup </button>} 
-     position="right center">
-      <div>GeeksforGeeks</div>
-      <button>Click here</button>
-    </Popup> */}
-    {buttonchange ? <Form/>:""}
+
+      {buttonchange ? <Form /> : ""}
+
     </ToDoBaseContainer>
   );
 };
