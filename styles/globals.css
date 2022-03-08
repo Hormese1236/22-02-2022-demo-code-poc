@@ -25,6 +25,7 @@ a {
   font-weight: bolder;
   font-style: normal;
   font-size: larger;
+  border-width: thin
 
   
 
@@ -33,19 +34,23 @@ a {
   width: 25pc;
   height: 3pc;
   border-radius: 1pc;
-  /* border-color:black; */
+   border-color:black;
+   
+   border-width: thin
+  
 }
 .priority{
   color: #0d3f5e;
   font-weight: bolder;
   font-style: normal;
   font-size: larger;
+  
 }
 .ttle{
  width: 25pc;
  height: 3pc;
  border-radius: 1pc;
-  border-color:black;
+
 }
 .desc{
   color: #0d3f5e;
@@ -54,6 +59,21 @@ a {
 
   
 }
-.btn{
-  background-color: black
+button[classname=btn2]{
+  width: 5pc;
+  height: 2pc;
+  border-radius: 1pc;
+
+  border: none;
+  color:#0d3f5e ;
+  font-weight: bold;
+}
+
+input[type=submit]{
+  width: 5pc;
+ height: 2pc;
+ border-radius: 1pc;
+ background-color: gray;
+ border: none;
+ color: white;
 }

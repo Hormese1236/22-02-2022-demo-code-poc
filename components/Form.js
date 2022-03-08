@@ -42,13 +42,16 @@ this.setState({value2:event.target.value})
   render() {
     return (
      
-<div> <br></br><br></br><h3 className="header">New To-do item</h3><form onSubmit={this.handleSubmit}>
+<div> <br></br><h3 className="header">New To-do item</h3><form onSubmit={this.handleSubmit}>
+  <br></br>
   <label className='title'>
   Title
  
   <br></br> 
+  
     <input className='name'  placeholder='Your description goes here' type="text" name="name" value={this.state.value} onChange={this.handleChange}/>
   </label>
+  <br></br>
   <br></br>
 
   <label className='priority'>
@@ -56,12 +59,15 @@ this.setState({value2:event.target.value})
       
   Priority Level<span className='optn'>(optional)</span>
   <br></br>
-<ToggleSwitch  />
+
+  <ToggleSwitch  />
   </label>
+  <br></br>
   <br></br>
  <GfgDatePicker />
  <br></br>
- <label className='title'>Assigned to
+ <br></br>
+ {/* <label className='title'>Assigned to
  <br>
  </br>
  </label>
@@ -74,14 +80,15 @@ this.setState({value2:event.target.value})
  </br>
  </label>
  
-<Dropdown className='ttle' options={option2} onChange={this._onSelect}  placeholder="Select an option" />
+<Dropdown className='ttle' options={option2} onChange={this._onSelect}  placeholder="Select an option" /> */}
 <label className='title'>Notes<br></br>
 <input  className='desc'  placeholder='Your description goes here' type="text" name="desc" value2={this.state.value2} onChange={this.handledescription}/></label>
 <br></br>
 <br></br>
-<button type="button" class="btn btn-danger">cancel</button>
+<br></br>
+<button type="button" classname="btn2" >Cancel</button>
 &nbsp;&nbsp;&nbsp;
-<input  classname="btn"type="submit" value="Submit" />
+<input   type="submit" value="Save" />
 
 </form></div>
     )

@@ -47,7 +47,7 @@ export default class ToggleSwitch extends Component {
        }}
           />
           
-         <h6>High priority</h6>
+          <h6>High priority</h6>
        
         
       </div>
