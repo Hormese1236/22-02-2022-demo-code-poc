@@ -84,7 +84,7 @@ export async function  addtask(accessToken,taskListId,postdata) {
       "Content-Type": "application/json",
     },
     data:
-    {postdata},
+    postdata,
     
   })
  .then((response) => {

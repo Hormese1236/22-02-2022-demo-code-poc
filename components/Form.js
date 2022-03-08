@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import GfgDatePicker from './Datepicker'
-
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 import ToggleButton from './ToogleButton/ToogleButton'
@@ -81,6 +82,7 @@ this.setState({value2:event.target.value})
  </label>
  
 <Dropdown className='ttle' options={option2} onChange={this._onSelect}  placeholder="Select an option" /> */}
+
 <label className='title'>Notes<br></br>
 <input  className='desc'  placeholder='Your description goes here' type="text" name="desc" value2={this.state.value2} onChange={this.handledescription}/></label>
 <br></br>
