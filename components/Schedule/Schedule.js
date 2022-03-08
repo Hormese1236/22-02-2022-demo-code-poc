@@ -135,11 +135,10 @@ const Schedule = (props) => {
           getStartDateTime(currentDate),
           getEndDateTime(currentDate)
         ).then((response) => {
-          const value = get(response,'value','')
-          if(!isEmpty(value)){
+          const value = get(response, "value", "");
+          if (!isEmpty(value)) {
             setScheduleData(value);
           }
-          
         });
       })
       .catch((e) => {

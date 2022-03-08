@@ -41,10 +41,10 @@ const SeeMore = (props) => {
   const { onClick } = props;
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const showDescription =()=>{
+  const showDescription = () => {
     setIsExpanded(!isExpanded);
     onClick();
-  }
+  };
 
   return (
     <SeeMoreButton onClick={showDescription}>
@@ -55,6 +55,5 @@ const SeeMore = (props) => {
     </SeeMoreButton>
   );
 };
-
 
 export default SeeMore;

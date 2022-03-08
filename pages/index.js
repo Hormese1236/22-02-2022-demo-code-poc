@@ -43,15 +43,15 @@ export default function Home() {
 
   const name = accounts[0] && accounts[0].name;
 
-  const updateTask = (task) =>{
+  const updateTask = (task) => {
     const updatedData = taskData.map((element) => {
-      if (element.id === task.id){
+      if (element.id === task.id) {
         return { ...element, isExpanded: !element.isExpanded };
       }
-     return element; 
+      return element;
     });
     setTaskData(updatedData);
-    }
+  };
 
   function RequestAccessToken() {
     const request = {

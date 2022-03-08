@@ -74,22 +74,20 @@ export function getCalenderEvents(accessToken, startDate, endDate) {
       console.log(error);
     });
 }
-export async function  addtask(accessToken) {
+export async function addtask(accessToken) {
   return axios({
     method: "POST",
     url: `${graphConfig.graphMeEndpoint}/me/todo/lists/{todoTaskListId}/tasks`,
-  
+
     headers: {
       Authorization: `Bearer ${accessToken}`,
       "Content-Type": "application/json",
     },
-    
   })
- .then((response) => {
+    .then((response) => {
       return response.data;
     })
     .catch((error) => {
       console.log(error);
     });
 }
-
