@@ -33,22 +33,22 @@ const ScheduleTitle = styled.div`
 `;
 const Timeline = styled.div`
   width: 100%;
-  margin: 0 auto;
+  margin: 1 auto;
   position: relative;
   ul {
     list-style: none;
-    margin: 0;
+    margin: 2;
     &:before {
       content: "";
       width: 2px;
       background: rgb(157, 163, 158);
       position: absolute;
-      left: 8px;
+      left: 1pc;
       height: 100%;
     }
     li {
       position: relative;
-      padding-left: 15px;
+      padding-left: 1rem;
 
       &:before {
         content: "";
@@ -70,16 +70,16 @@ const ScheduleCard = (props) => {
   const { time, subject, bodyPreview } = props;
   return (
     <Timeline>
-      <ul>
-        <li>
+      {/* <ul>
+        <li> */}
           <ScheduleList>
             <ScheduleTime>{time} </ScheduleTime>
             <ScheduleTitle>
               <span>{subject}</span>
             </ScheduleTitle>
           </ScheduleList>
-        </li>
-      </ul>
+        {/* </li>
+      </ul> */}
     </Timeline>
   );
 };

@@ -10,6 +10,7 @@ import { faChevronDown } from "@fortawesome/free-solid-svg-icons/faChevronDown";
 import { addtask, taskUpdate } from "../../pages/api/graph";
 import { render } from "react-dom";
 import Form from "../Form";
+import { StandardInteractionClient } from "@azure/msal-browser";
 
 const ToDoBaseContainer = styled.div`
   display: flex;
@@ -172,6 +173,13 @@ const Todo = (props) => {
       "November",
       "December"
     );
+    var  postdata={
+      title:"todo",
+      importance:'high',
+      body:"my task",
+      
+    }
+    addtask(accessToken,taskListId,postdata)
     const dayOfWeek = weekday[currentDate.getDay()];
     const dayOfMonth =
       currentDate.getDate() < 10
@@ -181,6 +189,7 @@ const Todo = (props) => {
     const curYear = currentDate.getFullYear();
     return `Today - ${curMonth} ${dayOfMonth}, ${curYear}`;
   };
+  
 
   const expandTodo = () => {
     setViewAllTodo((viewAll) => !viewAll);
@@ -221,7 +230,11 @@ const Todo = (props) => {
   function addbutton() {
     setbuttononchange(true);
   }
+<<<<<<< HEAD
   addtask(accessToken, taskListId);
+=======
+
+>>>>>>> c52e7559b4fa2b71fbb3f1fd11a1b5728c1e86aa
   return (
     <ToDoBaseContainer>
       <MainTitle>To-Do</MainTitle>

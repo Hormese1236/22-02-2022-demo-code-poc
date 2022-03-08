@@ -17,32 +17,41 @@ const defaultOption = options[0];
 export default class Form extends Component {
   constructor(props) {
     super(props);
-    this.state = {value: '',priority:Boolean};
+    this.state = {value: '',value2:''};
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+ this.handledescription=this.handledescription.bind(this)
   }
   handleChange(event) {
     this.setState({value: event.target.value});
+    
+  }
+  handledescription(event){
+this.setState({value2:event.target.value})
   }
 
   handleSubmit(event) {
-    alert('A name was submitted: ' + this.state.value);
+    alert('A name was submitted: ' + this.state.value + this.state.value2);
     event.preventDefault();
     <GfgDatePicker />
  
     
   }
+ 
   render() {
     return (
      
-<div> <br></br><br></br><h3 className="header">New To-do item</h3><form onSubmit={this.handleSubmit}>
+<div> <br></br><h3 className="header">New To-do item</h3><form onSubmit={this.handleSubmit}>
+  <br></br>
   <label className='title'>
   Title
  
   <br></br> 
-    <input className='name'  placeholder='Your description goes here' type="text" name="name"value={this.state.value} onChange={this.handleChange} />
+  
+    <input className='name'  placeholder='Your description goes here' type="text" name="name" value={this.state.value} onChange={this.handleChange}/>
   </label>
+  <br></br>
   <br></br>
 
   <label className='priority'>
@@ -50,12 +59,15 @@ export default class Form extends Component {
       
   Priority Level<span className='optn'>(optional)</span>
   <br></br>
-<ToggleSwitch />
+
+  <ToggleSwitch  />
   </label>
+  <br></br>
   <br></br>
  <GfgDatePicker />
  <br></br>
- <label className='title'>Assigned to
+ <br></br>
+ {/* <label className='title'>Assigned to
  <br>
  </br>
  </label>
@@ -68,15 +80,16 @@ export default class Form extends Component {
  </br>
  </label>
  
-<Dropdown className='ttle' options={option2} onChange={this._onSelect}  placeholder="Select an option" />
+<Dropdown className='ttle' options={option2} onChange={this._onSelect}  placeholder="Select an option" /> */}
 <label className='title'>Notes<br></br>
-<input  className='desc'  placeholder='Your description goes here' type="text" name="name"/></label>
+<input  className='desc'  placeholder='Your description goes here' type="text" name="desc" value2={this.state.value2} onChange={this.handledescription}/></label>
 <br></br>
 <br></br>
-<button type="button" class="btn btn-danger">cancel</button>
+<br></br>
+<button type="button" classname="btn2" >Cancel</button>
 &nbsp;&nbsp;&nbsp;
-<input  classname="btn"type="submit" value="Submit" />
-{/* <button type="button" class="btn btn-primary">submit</button> */}
+<input   type="submit" value="Save" />
+
 </form></div>
     )
   }

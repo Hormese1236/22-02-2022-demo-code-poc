@@ -6,21 +6,26 @@ export default class ToggleSwitch extends Component {
     super(props);
 
     this.state = {
+ 
       isloggedin: false,
       
     };
+   
+
   }
   componentDidMount() {
-    if (this.props.value === "true") {
-      this.setState({ isloggedin: true });
+  
+    // if (this.props.value === "true") {
+    //   this.setState({ isloggedin: true });
 
-      this.setState({ checked: false });
-    } else {
-      this.setState({ isloggedin: false });
-      this.setState({ checked: true });
+    //   this.setState({ checked: false });
+    // } else {
+    //   this.setState({ isloggedin: false });
+    //   this.setState({ checked: true });
      
-    }
+    // }
    
+    
   }
  
 
@@ -35,10 +40,14 @@ export default class ToggleSwitch extends Component {
             type="checkbox"
             name="checkbox"
             class="cm-toggle green"
-       
+       onClick={()=>{
+   var important="true"
+   console.log(important)
+  
+       }}
           />
           
-         <h6>High priority</h6>
+          <h6>High priority</h6>
        
         
       </div>
