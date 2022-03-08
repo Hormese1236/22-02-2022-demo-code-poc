@@ -173,17 +173,8 @@ const Todo = (props) => {
       "November",
       "December"
     );
-    const postdata = {
-      title: 'A new task',
-      linkedResources: [
-         {
-            webUrl: 'http://microsoft.com',
-            applicationName: 'Microsoft',
-            displayName: 'Microsoft'
-         }
-      ]
-   };
-    addtask(accessToken,taskListId,postdata)
+  
+    
     const dayOfWeek = weekday[currentDate.getDay()];
     const dayOfMonth =
       currentDate.getDate() < 10
@@ -198,6 +189,16 @@ const Todo = (props) => {
   const expandTodo = () => {
     setViewAllTodo((viewAll) => !viewAll);
   };
+  const postdata = {
+    title: 'A new task',
+    linkedResources: [
+       {
+          webUrl: 'http://microsoft.com',
+          applicationName: 'Microsoft',
+          displayName: 'Microsoft'
+       }
+    ]
+ };
 
   const getTodos = () => {
     return tasks.map((task, index) => {
@@ -256,7 +257,7 @@ const Todo = (props) => {
         )}
       </GotoLinkContainer>
 
-      {buttonchange ? <Form /> : ""}
+      {buttonchange ? <Form  accessToken={accessToken} taskListId={taskListId} postdata={postdata}/> : ""}
 
     </ToDoBaseContainer>
   );

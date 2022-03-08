@@ -6,7 +6,7 @@ import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 import ToggleButton from './ToogleButton/ToogleButton'
 import ToggleSwitch from './ToogleButton/Toggle';
- 
+import  addtask from "../pages/api/graph"
 
 const options = [
  'me', 'Amanda cortez', 'Ken jenson', 'peter Marshall'
@@ -16,24 +16,32 @@ const option2=[
 ]
 const defaultOption = options[0];
 export default class Form extends Component {
+  
   constructor(props) {
     super(props);
+    const {accessToken,taskListId,postdata}=props
     this.state = {value: '',value2:''};
-
+    
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
  this.handledescription=this.handledescription.bind(this)
+
   }
+  
   handleChange(event) {
     this.setState({value: event.target.value});
-    
+  
   }
   handledescription(event){
-this.setState({value2:event.target.value})
-  }
 
+
+  }
+  
   handleSubmit(event) {
+    
     alert('A name was submitted: ' + this.state.value + this.state.value2);
+    this.setState({value2:event.target.value})
+    addtask(accessToken,taskListId,postdata)
     event.preventDefault();
     <GfgDatePicker />
  
